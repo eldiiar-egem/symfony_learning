@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        {% block stylesheets %}
+            <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
+        {% endblock %}
+        {#<meta charset="UTF-8" />#}
+        {#<title>{% block title %}Welcome!{% endblock %}</title>#}
+        {#{% block stylesheets %}{% endblock %}#}
+        {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
+    {#</head>#}
+    {#<body>#}
+        {#{% block body %}{% endblock %}#}
+        {#{% block javascripts %}{% endblock %}#}
+    {#</body>#}
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Test Application{% endblock %}</title>
+    </head>
+    <body>
+    <div id="sidebar">
+        {% block sidebar %}
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        {% endblock %}
+    </div>
+    <input id="users" type="text" size="20" placeholder="Users">
+    <input id="clicks" type="text" size="20" placeholder="clicks">
+    <input id="buttons" type="text" size="20" placeholder="buttons">
+    <input id="lines" type="text" size="20" placeholder="lines">
+    <button>submit</button>
+
+    {#<div id="content">#}
+        {#{% block body %}{% endblock %}#}
+    {#</div>#}
+
+    {% block javascripts %}
+        <script src="{{ asset('js/main.js') }}"></script>
+    {% endblock %}
+    </body>
+</html>

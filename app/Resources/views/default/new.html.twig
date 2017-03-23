@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+<input id="users" type="text" size="20" placeholder="Users">
+<input id="clicks" type="text" size="20" placeholder="clicks">
+<input id="buttons" type="text" size="20" placeholder="buttons">
+<input id="lines" type="text" size="20" placeholder="lines">
+<table width="50%" cellspacing="0" cellpadding="4" border="1">
+    <tr>
+        <th>ФИО</th>
+        <th>Стаж в сфере IT</th>
+        <th>Оклад</th>
+        <th>Номер телефона</th>
+    </tr>
+
+    {% for i in 1..10 %}
+        <tr><td>Сатыбалдыев Тилек Рысбаевич</td><td> {{ i }} год</td><td>{{ form.vars.value.task }}</td><td>+996000000</td></tr>
+    {% endfor %}
+</table>

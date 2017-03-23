@@ -1,0 +1,21 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+blog_list:
+    path:      /blog/{page}
+    defaults:  { _controller: AppBundle:Blog:list, page: 1 }
+    requirements:
+        page: '\d+'
+
+blog_show:
+    path:      /blog/{slug}
+    defaults:  { _controller: AppBundle:Blog:show }
+
+article_show:
+  path:     /articles/{_locale}/{year}/{slug}.{_format}
+  defaults: { _controller: AppBundle:Article:show, _format: html }
+  requirements:
+      _locale:  en|fr
+      _format:  html|rss
+      year:     \d+
