@@ -1,0 +1,25 @@
+AppBundle\Entity\Logos:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\LogosRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        userId:
+            type: integer
+            unique: false
+            column: user_name
+        buttonNumber:
+            type: integer
+            column: button_number
+        clickNumber:
+            type: integer
+            column: click_number
+        recordedTime:
+            type: date
+            column: time
+    lifecycleCallbacks: {  }
