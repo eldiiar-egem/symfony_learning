@@ -1,69 +1,77 @@
-<a href="/logs">
-    {#<button>Start Analitics</button>#}
-</a>
-<table width="20%" cellspacing="0" cellpadding="4" border="1">
-    <tr>
-        <th>Buttons</th>
-        <th>{{buttons  }}</th>
-    </tr>
-    <tr>
-        <th>Users</th>
-        <th>{{users  }}</th>
-    </tr>
-    <tr>
-        <th>count</th>
-        <th>{{count  }}</th>
-    </tr>
+{% extends 'base.html.twig' %}
 
-</table>
-
-{% block content %}
-
-    <h1>Form values</h1>
-
-    {% if name is defined %}
-
-        <p>Name: {{ name }}</p>
-
-    {% endif %}
-
-    <div>
-
-        <form action="" method="post" name="input">
-
-            Name:
-            <input name="name" type="text" />
-
-            Buttons:
-            <input name="buttons" type="text" />
+{% block title %}Logs{% endblock %}
 
 
-            Users:
-            <input name="users" type="text" />
+{% block body %}
+    {% block inputed_info %}
+        <table width="20%" cellspacing="0" cellpadding="4" border="1">
+            <tr>
+                <th>Buttons</th>
+                <th>{{buttons  }}</th>
+            </tr>
+            <tr>
+                <th>Users</th>
+                <th>{{users  }}</th>
+            </tr>
+            <tr>
+                <th>count</th>
+                <th>{{count  }}</th>
+            </tr>
 
-            Count:
-            <input name="count" type="text" />
-            <input name="submit" type="submit" value="Submit" />
+        </table>
+
+    {% endblock %}
+    {% block content %}
+
+        <h1>Form values</h1>
+
+        {% if name is defined %}
+
+            <p>Name: {{ name }}</p>
+
+        {% endif %}
+
+        <div>
+
+            <form action="" method="post" name="input">
+
+                Name:
+                <input name="name" type="text" />
+
+                Buttons:
+                <input name="buttons" type="text" />
+
+
+                Users:
+                <input name="users" type="text" />
+
+                Count:
+                <input name="count" type="text" />
+                <input name="submit" type="submit" value="Submit" />
 
 
              </form>
 
-    </div>
+        </div>
+
+
+    <table width="50%" cellspacing="0" cellpadding="4" border="1">
+        <tr>
+            <th>Button's Id</th>
+            <th>clicks</th>
+            {#<th>type of base</th>#}
+            {#<th>time</th>#}
+        </tr>
+        {% for key,value in button_list %}
+            <tr><td>{{ key  }}</td><td> {{ value }} </tr>
+        {% endfor %}
+        {#{% for i in 1..3 %}#}
+        {#<tr><td>{{ context.getUserId }}</td><td> {{ i }} </td><td>file</td><td>{{ filetime }}</td></tr>#}
+        {#{% endfor %}#}
+
+    </table>
+
+    {% endblock %}
 
 {% endblock %}
-
-<table width="50%" cellspacing="0" cellpadding="4" border="1">
-    <tr>
-        <th>Button's Id</th>
-        <th>clicks</th>
-        {#<th>type of base</th>#}
-        {#<th>time</th>#}
-    </tr>
-    {% for key,value in button_list %}
-        <tr><td>{{ key  }}</td><td> {{ value }} </tr>
-    {% endfor %}
-    {#{% for i in 1..3 %}#}
-        {#<tr><td>{{ context.getUserId }}</td><td> {{ i }} </td><td>file</td><td>{{ filetime }}</td></tr>#}
-    {#{% endfor %}#}
-
-</table>

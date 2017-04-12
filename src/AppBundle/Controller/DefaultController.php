@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Entity\Product;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -42,6 +41,9 @@ class DefaultController extends Controller
             $name = $post->request->get('name');
         } else {
             $name = 'Not submitted yet';
+            $users =0;
+            $buttons = 0;
+            $count = 0;
         }
 
         echo $variable;
@@ -63,7 +65,8 @@ class DefaultController extends Controller
 //                array_push($arr, $number);
             }
         }
-        arsort($button_list);
+        if ($button_list) $button_list = to_database($button_list);
+//        arsort($button_list);
 // Sleep for a while
 //        usleep(100);
 
@@ -145,6 +148,7 @@ class DefaultController extends Controller
         $task->setTask('Write a blog post');
         $task->setDueDate(new \DateTime('today'));
 
+
         $form = $this->createFormBuilder($task)
             ->add('task', TextType::class)
             ->add('dueDate', DateType::class)
@@ -169,11 +173,50 @@ class DefaultController extends Controller
 
             return $this->redirectToRoute('task_success');
         }
-        echo "i got here---------------------------------------------------";
+//        echo "i got here---------------------------------------------------";
         return $this->render('default/new.html.twig', array(
             'form' => $form->createView(),
         ));
     }
+}
+
+function myOwnSort($unsorted){
+    $temp_array = [];
+    arsort($unsorted);
+    foreach ($unsorted as $k => $v) {
+        $volume[$k] = $k;
+        $temp_array["value"] =$v;
+
+//        echo "\$a[$k] => $v.\n";
+    }
+    return $unsorted;
+
+}
+function to_database($dictionary){
+    $new_dict = [];
+    foreach ($dictionary as $key => $value){
+        $new_dict[] = array("key" => $key, "value" => $value);
+    }
+
+    foreach ($new_dict as $key => $row) {
+        $volume[$key]  = $row['key'];
+        $edition[$key] = $row['value'];
+    }
+    array_multisort($edition, SORT_DESC, $volume, SORT_ASC, $new_dict);
+    return back_to_dictionary($new_dict);
+}
+function back_to_dictionary($data){
+
+    foreach ($data as $key => $row) {
+        // print_r("$key ---- $row");
+//        print_r("$key   \n");
+        foreach($row as $k => $v){
+//            print_r("$k ---- $v \n");
+            $new_dict[$row['key']] = $row['value'];
+        }
+
+    }
+    return $new_dict;
 }
 //
 //namespace AppBundle\Controller;
